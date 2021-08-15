@@ -14,8 +14,8 @@ class BotFun:
 class Reg(BotFun):
     def reg(self, message):
         user_id = message.from_user.id
-        if "NULL" not in self.db.get_user_entry(user_id)[0]:
-            self.bot.send_message(user_id, f"{self.db.get_user_entry(user_id)[0][6]}, "
+        if "NULL" not in self.db.get_user_entry(user_id):
+            self.bot.send_message(user_id, f"{self.db.get_user_entry(user_id)[6]}, "
                                            f"Вы уже зарегистрированны в боте и можете пользоваться всеми стандартными "
                                            f"функциями")
         else:
@@ -191,58 +191,40 @@ class Admin(BotFun):
             self.del_event(message)
 
     def create_event(self, message):
-        pass
+        user_id = message.from_user.id
+        self.bot.send_message(user_id, 'Введите название ')
 
     def del_event(self, message):
-        pass
+        user_id = message.from_user.id
 
     def update_event(self, message):
-        pass
+        user_id = message.from_user.id
 
     def list_event(self, message):
         user_id = message.from_user.id
         print(f"Выполнен запрос списка Мероприятий пользователем с id {user_id}")
-        for i in self.db.get_user_entry(get_all=True):
+        for i in self.db.get_event_entry(get_all=True):
             id = i[0]
-            platform = i[1]
-            department = i[2]
-            group_number = i[3]
-            date_of_birth = i[4]
-            name = i[6]
-            surname = i[7]
-            tel = i[8]
-            email = i[9]
+            address = i[1]
+            name_event = i[2]
+            date_event = i[3]
+            time_event = i[4]
+            description = i[6]
+            participants = i[7]
+            required = i[8]
             print(i)
-            if self.db.is_member(user_id=id):
-                b = self.db.get_member_entry(user_id=id)
-                print(b)
-                status = b[1]
-                post = b[2]
-                warning = b[3]
-                reprimand = b[4]
-                score = b[5]
-                self.bot.send_message(user_id, f'''
+            self.bot.send_message(user_id, f'''
         ID: {id}
-        Имя: {name} {surname}
-        Дата рождения: {date_of_birth}
-        Тлефон: {tel}
-        E-mail: {email}
-        Обучается по адрессу {platform} в {department} № группы {group_number}
-        Его статус {status}
-        Чем занимается: {post}
-            Выговоры: {warning}
-            Предупреждения: {reprimand}
-            Балы: {score}''')
-            else:
-                self.bot.send_message(user_id, f'''
-        ID: {id}
-        Имя: {name} {surname}
-        Дата рождения: {date_of_birth}
-        Тлефон: {tel}
-        E-mail: {email}
-        Обучается по адрессу {platform} в {department} № группы {group_number}
-        В студенческом совете не стостоит''')
-            print(i)
+        Название: {name_event}
+        {date_event} {time_event}
+        Адресс: {address}
+        
+        {description}
+        
+        Требуются: {required}
+        Участники: {participants}
+        
+        ''')
 
     def list_member(self, message):
         user_id = message.from_user.id

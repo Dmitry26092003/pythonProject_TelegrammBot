@@ -42,6 +42,7 @@ class DataBase:
             name_event TEXT,
             date_event TEXT,
             time_event TEXT,
+            description TEXT,
             participants TEXT,
             required TEXT);''')
         cur.close()
@@ -546,16 +547,23 @@ class DataBase:
 
     # EVENT
 
-    def add_event(self, address, name, date, time, users, required):
+    def add_event(self, address='Отсутствует',
+                  name='Отсутствует',
+                  date='Не указанно',
+                  time='Не указанно',
+                  description='Отсутствует',
+                  users='',
+                  required=''):
         cur = self.conn.cursor()
         try:
             cur.execute("""
                             INSERT INTO event 
-                            VALUES(:adres, :name_event, :date_event, :time_event, :participants, :required)""", {
+                            VALUES(:adres, :name_event, :date_event, :time_event, :description, :participants, :required)""", {
                 "name_event": address,
                 "address": name,
                 "date_event": date,
                 "time_event": time,
+                "description": description,
                 "participants": users,
                 "required": required,
             })
