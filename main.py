@@ -68,15 +68,25 @@ def main():
             elif '!status' in message.text:
                 A.status(message)
 
-            elif '!create_event' in message.text:
+            elif ('!create_event' in message.text) or (
+                    len({"создать", "мероприятие"} & set(mes)) != 0):
                 A.create_event(message)
-            elif '!del_event' in message.text:
+
+            elif ('!del_event' in message.text) or (
+                    len({"удалить", "мероприятие"} & set(mes)) != 0):
                 A.del_event(message)
-            elif '!update_event' in message.text:
+
+            elif ('!list_event' in message.text) or (
+                    len({"список", "мероприятий"} & set(mes)) != 0):
+                A.list_event(message)
+
+            elif ('!update_event' in message.text) or (
+                    len({"редактировать", "мероприятие"} & set(mes)) != 0):
                 A.update_event(message)
 
             elif '!send_member' in message.text:
                 A.send_member(message)
+
             elif '!send_all' in message.text:
                 A.send_all(message)
             else:
