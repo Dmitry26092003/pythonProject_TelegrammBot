@@ -498,9 +498,16 @@ E-mail: {email}
         print(reprimand)
         self.db.update_reprimand_member(user_id=self.id, date='' + str(reprimand))
         self.bot.send_message(user_id, f'Предупреждения пользователя {reprimand}')
+        if reprimand >= 3:
+            warning = eval(str(self.db.get_member_entry(user_id=self.id)[-3]) + reprimand//3)
+            self.db.update_warning_member(user_id=self.id, date='' + str(warning))
+            self.bot.send_message(user_id, f'Выговоры пользователя {warning}')
+            reprimand %= 3
+            self.db.update_reprimand_member(user_id=self.id, date='' + str(reprimand))
+            self.bot.send_message(user_id, f'Предупреждения пользователя {reprimand}')
         self.profile(message=self.message)
 
-    def profile_warning(self, message):   # не работает 
+    def profile_warning(self, message):   # не работает
         print("profile_warning")
         user_id = message.from_user.id
         print(self.db.get_member_entry(user_id=self.id))
@@ -508,6 +515,9 @@ E-mail: {email}
         print(warning)
         self.db.update_warning_member(user_id=self.id, date='' + str(warning))
         self.bot.send_message(user_id, f'Выговоры пользователя {warning}')
+        if warning == 3:
+            self.db.delete_member(user_id=self.id)
+            self.bot.send_message(user_id, 'Пользователь исключен')
         self.profile(message=self.message)
 
     def profile_send_message(self, message):
