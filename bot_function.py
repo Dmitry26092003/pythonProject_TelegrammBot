@@ -496,7 +496,7 @@ E-mail: {email}
         print(self.db.get_member_entry(user_id=self.id))
         reprimand = eval(str(self.db.get_member_entry(user_id=self.id)[-2]) + message.text)
         print(reprimand)
-        self.db.update_score_member(user_id=self.id, date='' + str(reprimand))
+        self.db.update_reprimand_member(user_id=self.id, date='' + str(reprimand))
         self.bot.send_message(user_id, f'Предупреждения пользователя {reprimand}')
         self.profile(message=self.message)
 
@@ -506,7 +506,7 @@ E-mail: {email}
         print(self.db.get_member_entry(user_id=self.id))
         warning = eval(str(self.db.get_member_entry(user_id=self.id)[-3]) + message.text)
         print(warning)
-        self.db.update_score_member(user_id=self.id, date='' + str(warning))
+        self.db.update_warning_member(user_id=self.id, date='' + str(warning))
         self.bot.send_message(user_id, f'Выговоры пользователя {warning}')
         self.profile(message=self.message)
 
