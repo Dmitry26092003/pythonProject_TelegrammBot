@@ -500,7 +500,7 @@ E-mail: {email}
         self.bot.send_message(user_id, f'Предупреждения пользователя {reprimand}')
         self.profile(message=self.message)
 
-    def profile_warning(self, message):   # не работает
+    def profile_warning(self, message):   # не работает 
         print("profile_warning")
         user_id = message.from_user.id
         print(self.db.get_member_entry(user_id=self.id))
