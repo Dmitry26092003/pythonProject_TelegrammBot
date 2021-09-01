@@ -93,6 +93,7 @@ def main():
                 I_do_not_understand(user_id)
         elif message.text[0] == '!':
             U.Not_Admin(user_id)
+
         elif (message.text == '/reg') or (  # Регистрация в боте
                 len({"зарегистрироваться", "регистрация"} & set(mes)) != 0):
             R = Reg(bot, db)
