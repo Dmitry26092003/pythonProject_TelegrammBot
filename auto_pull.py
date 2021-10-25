@@ -2,11 +2,11 @@ import os
 import time
 
 while True:
-    time.sleap(10000)
+    time.sleep(10)
     try:
-        os.systeam('git pull')
-    except:
-        print("pull error")
+        os.system('git pull')
+    except Exception as error:
+        print(f"pull error:\n{error}")
     else:
         print("pull successful")
 
