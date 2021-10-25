@@ -1,4 +1,7 @@
 token = '1862355464:AAHU3LjziaDRYnC91xVogNaxDUKnmY7HKrk'
+
+ap_sleep = 10
+
 help_text = '''
 Привет, вот что я могу:
     /reg - зарегистрироваться 
