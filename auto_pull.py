@@ -7,7 +7,7 @@ while True:
     try:
         os.system('git pull')
     except Exception as error:
-        print(f"pull error:\n{error}")
+        pass
     else:
         print("pull successful")
 
