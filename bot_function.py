@@ -26,8 +26,9 @@ class Reg(BotFun):
             self.bot.register_next_step_handler(message, self.platform)
 
     def platform(self, message):
+        user_id = message.from_user.id
         if message.text.lower() in ['no', 'нет']:
-            return
+            self.bot.send_message(user_id, 'Регистрация завершена.', reply_markup=types.ReplyKeyboardRemove())
         user_id = message.from_user.id
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
         buttons = ["Приморский, 63", "Энгельса, 23"]
@@ -66,7 +67,7 @@ class Reg(BotFun):
     def name(self, message):
         user_id = message.from_user.id
         self.db.update_gender_user(user_id, message.text)
-        self.bot.send_message(user_id, 'Как тебя зовут? (ПОЛНОЕ ИМЯ)', reply_markup=types.ReplyKeyboardRemove())
+        self.bot.send_message(user_id, 'Как тебя зовут? (только ИМЯ в оффициальной форме)', reply_markup=types.ReplyKeyboardRemove())
         self.bot.register_next_step_handler(message, self.surname)
 
     def surname(self, message):
@@ -108,7 +109,7 @@ class Reg(BotFun):
     def reg_end_(self, message):
         user_id = message.from_user.id
         if message.text.lower() in ['да', 'yes']:
-            self.bot.send_message(user_id, 'Супер)))', reply_markup=types.ReplyKeyboardRemove())
+            self.bot.send_message(user_id, 'Регистрация завершена.', reply_markup=types.ReplyKeyboardRemove())
         else:
             keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
             buttons = ["Да", "Нет"]
@@ -551,6 +552,10 @@ E-mail: {email}
 
 
 class Member(BotFun):
+    pass
+
+
+class Event(BotFun):
     pass
 
 
